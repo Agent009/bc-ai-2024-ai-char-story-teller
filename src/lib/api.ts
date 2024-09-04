@@ -1,3 +1,4 @@
+import { createOpenAI } from "@ai-sdk/openai";
 import { constants } from "@lib/index";
 
 /**
@@ -36,4 +37,12 @@ export const getApiUrl = (endpoint: string, params?: { [key: string]: never }): 
     });
   }
   return apiUrl;
+};
+
+export const initializeOpenAI = () => {
+  return createOpenAI({
+    baseURL: constants.openAI.useLocal ? constants.openAI.localBaseURL : undefined,
+    apiKey: constants.openAI.apiKey,
+    compatibility: "strict", // strict mode, enable when using the OpenAI API
+  });
 };
