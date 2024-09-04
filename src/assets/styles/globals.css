@@ -1,0 +1,826 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles/globals.css */
+/* HEADER CSS START */
+:root {
+  /* Orange Tones */
+  --very-light-pink: #ffa8a7;
+  --light-pink: #ffa4a1;
+  --normal-pink: #f28f8f;
+  --medium-pink: #fe7366;
+  --deep-pink: #eb6f64;
+
+  /* Blue Tones */
+  --very-light-blue: #ebf0fe;
+  --dusty-blue: #4d87bd;
+  --dark-blue: #061f36;
+  --light-blue: #1e5282;
+  --medium-blue: #123e66;
+
+  /* Off-white Tones */
+  --very-light-offwhite: #e0e0e0;
+  --light-offwhite: #e6e6e6;
+
+  /* Gray Tones */
+  --light-gray: #f6f6f6;
+  --normal-gray: #37474f;
+  --dark-gray: #3b3b3b;
+  --deep-gray: #263238;
+  --medium-gray: #c8c8c8;
+
+  /* Additional Colors */
+  --light-periwinkle: #b8c0e9;
+  --light-purple: #ba68c8;
+  --deep-orange: #f85545;
+  --lightest-blue: #f8faff;
+}
+/* Add this to your global styles.css */
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-flash {
+  animation: flash 1s ease-in-out;
+}
+
+@keyframes animatePic {
+  0% {
+    left: -50px;
+    opacity: 0;
+  }
+  100% {
+    left: -25px;
+    opacity: 1;
+  }
+}
+.animatePic {
+  animation-name: animatePic;
+  animation-duration: 0.5s;
+  left: -25px;
+}
+
+@keyframes increaseSvgLength {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(1.1);
+  }
+}
+
+.increaseSvgLength {
+  transform-origin: left;
+  animation-name: increaseSvgLength;
+  transform: scaleX(1.1);
+}
+
+@keyframes increaseArrowHeight {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(1.12);
+  }
+}
+.increaseArrowHeight {
+  transform-origin: bottom;
+  animation-name: increaseArrowHeight;
+  transform: scaleY(1.12);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+@keyframes animate-line1 {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 25%;
+  }
+}
+
+@keyframes animate-line2 {
+  0% {
+    left: 25%;
+  }
+  100% {
+    left: 50%;
+  }
+}
+
+.animate-line1 {
+  animation: animate-line1 2s linear forwards; /* Use forwards to keep the final state */
+}
+
+.animate-line2 {
+  animation: animate-line2 2s linear forwards; /* Use forwards to keep the final state */
+}
+
+.image-container {
+  @apply relative inline-block;
+}
+
+.image-overlay {
+  @apply absolute top-0 left-0 right-0 bottom-0 opacity-0 rounded-full scale-100;
+
+  background: linear-gradient(to top, black 0%, black 30%, transparent 50%, transparent 100%);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 0.5;
+  transform: scale(1.25);
+}
+
+/* Flash effect */
+.flash-effect {
+  animation: flash 0.2s linear;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Bounce opacity effects */
+.bounce-opacity-fast {
+  animation: bounceOpacity 500ms ease-in-out;
+}
+
+.bounce-opacity-slow {
+  animation: bounceOpacity 1000ms ease-in-out;
+}
+
+@keyframes bounceOpacity {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* https://play.tailwindcss.com/7KnlE8Y90A */
+
+.bg-cyan-white-gradient {
+  background: transparent linear-gradient(180deg, #bacefc2f 18%, #f4f4f41a 28%) 0% 0% no-repeat padding-box;
+}
+
+.navbar-menu-item {
+  @apply text-[var(--dark-gray)] font-semibold relative cursor-pointer px-1 py-2.5 text-center text-[18px]  hover:text-[var(--deep-orange)];
+}
+
+.navbar-menu-item-webDesign {
+  @apply text-[var(--dark-gray)] font-semibold p-2.5 text-[18px] cursor-pointer hover:text-[var(--deep-orange)];
+}
+
+.header-social-icons {
+  @apply mx-1;
+}
+.header-social-icons path {
+  @apply text-[var(--light-blue)] group-hover/linkedin:fill-[var(--deep-orange)]  group-hover/facebook:fill-[var(--deep-orange)] group-hover/twitter:fill-[var(--deep-orange)];
+}
+
+/* CSS FOR SUBMENU ITEMS */
+.submenu {
+  @apply hidden group-hover/web-design:flex justify-between px-[32rem] absolute bg-white w-full left-0 mt-9 py-8;
+  filter: drop-shadow(0px 8px 22px #1e528226);
+}
+
+.submenu-item {
+  @apply flex text-sm items-center;
+}
+
+.submenu-img {
+  @apply bg-[#F3F6FF] px-4 py-3 rounded-[14px] w-[75px] h-[65px];
+}
+
+.submenu-title {
+  @apply font-bold text-[var(--dark-gray)] text-[14px] pl-[1rem] pr-[3.5rem];
+}
+
+.submenu-item:hover .submenu-img {
+  @apply rounded-[12px];
+}
+
+.submenu-item:hover svg path {
+  fill: var(--medium-pink);
+}
+
+.submenu-item:hover .submenu-title {
+  @apply text-[var(--light-blue)];
+}
+
+/* HEADER CSS END */
+
+/* FOOTER CSS START */
+.footer-social-icon {
+  @apply mx-2;
+}
+
+.footer-social-icon path {
+  @apply transition-all duration-200 group-hover/twitter:fill-white group-hover/arrow:fill-white group-hover/facebook:fill-white group-hover/linkedin:fill-white;
+}
+
+.footer-up-right-arrow g {
+  @apply transition-all duration-200 stroke-[var(--deep-orange)] group-hover/arrow:stroke-white;
+}
+
+/* FOOTER CSS END */
+
+/* ######### HOME PAGE CSS START ######### */
+
+/* 1ST SECTION CSS START */
+.estimate-project-btn {
+  @apply bg-[var(--light-blue)] text-white text-xl font-[500] px-14 py-7 rounded-xl shadow-lg transition duration-300 transform hover:bg-[var(--deep-orange)];
+}
+/* 1ST SECTION CSS END */
+
+/* 2ND SECTION CSS START */
+/* Our hats */
+.our-hat {
+  @apply flex items-center py-4 w-[140px] text-xl font-[500] hover:text-[var(--deep-orange)] border-b-2 hover:border-[var(--deep-orange)] transition-all duration-200 cursor-pointer;
+}
+
+.our-hat-icon {
+  @apply transition-all duration-200 opacity-0 mr-4 group-hover/hat:opacity-100;
+}
+
+.our-hat-selected .our-hat {
+  @apply text-[var(--deep-orange)] border-b-2 border-[var(--deep-orange)];
+}
+.our-hat-selected .our-hat-icon {
+  @apply opacity-100;
+}
+
+/* 2ND SECTION CSS END */
+
+/* 3RD SECTION CSS START */
+
+/* 3RD SECTION CSS END */
+
+/* 4TH SECTION CSS START */
+
+.results-right-arrow g {
+  @apply transition-all duration-200 group-hover/results-right-arrow:stroke-white;
+}
+
+/* 4TH SECTION CSS END */
+
+/* 5TH SECTION CSS START */
+.ourclients-bullet-points {
+  @apply w-2 h-2 bg-gray-600 rounded-full cursor-pointer transition duration-200 inline-block;
+}
+
+.shadow-light-gray {
+  filter: drop-shadow(0px 8px 22px #061f361a);
+}
+
+/* 5TH SECTION CSS END */
+
+/* 6th SECTION CSS START */
+
+/* 6th SECTION CSS END */
+
+/* 7th SECTION CSS START */
+.contact-input-box {
+  @apply px-8 py-7 border-[2px] text-lg border-gray-200 hover:border-[#1e5282a4] focus:outline-[#1e5282a4] text-gray-500 w-full;
+}
+
+.contact-input-focused {
+  @apply text-[#1e528201] invisible font-semibold absolute left-8 top-9 transition-all duration-300 transform  peer-focus:-translate-y-7 peer-focus:text-[#1e5282a4] peer-focus:visible;
+}
+
+.contact-freelancer-outer-circle {
+  @apply flex items-center justify-center h-5 w-5 rounded-full border-2 transition-all duration-300 border-gray-300  hover:border-[var(--light-blue)] focus:bg-[var(--light-blue)] focus:border-[var(--light-blue)] group-hover:border-[var(--light-blue)];
+}
+
+.contact-freelancer-inner-circle {
+  @apply inline-block h-2 w-2 rounded-full bg-white;
+}
+/* 7th SECTION CSS END */
+
+/* DIGITAL STRATEGY CSS PAGE */
+.strategy-formation-orange-icon {
+  @apply bg-[var(--medium-pink)] text-white text-2xl w-10 h-10 my-6 rounded-full flex items-center justify-center;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* WEBSITE & APP DEVELOPMENT PAGE */
+.loopImage {
+  transition:
+    opacity 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+}
+
+/* PARTNERS PAGE CSS */
+.shadowed {
+  filter: drop-shadow(0 10px 10px #1e528226);
+}
+
+/* ################ TEAMS PAGE CSS ############### */
+
+/* Asim khan CSS Properties */
+
+/* AudioIcon.module.css */
+.container {
+  @layer {
+    position: relative;
+    /* width: 283px; */
+    /* height: 283px; */
+    background-color: #f3f4f6; /* Equivalent to bg-gray-100 in Tailwind */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.image {
+  @layer {
+    position: absolute;
+    transition: opacity 0.6s ease;
+  }
+}
+
+.container:hover .static {
+  @layer {
+    opacity: 0;
+  }
+}
+
+.animated {
+  @layer {
+    opacity: 0;
+  }
+}
+
+.container:hover .animated {
+  @layer {
+    opacity: 1;
+  }
+}
+
+/* AudioIcon.module.css */
+.container {
+  @layer {
+    position: relative;
+    background-color: #f3f4f6; /* Equivalent to bg-gray-100 in Tailwind */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.image {
+  @layer {
+    position: absolute;
+    transition: opacity 0.6s ease;
+  }
+}
+
+.image.hidden {
+  @layer {
+    opacity: 0;
+  }
+}
+
+/* Let's Get Your Project Started! Section checkbox properties  */
+
+.circle-checkbox {
+  border-radius: 100%;
+  border: 2px solid #1e5282;
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.circle-checkbox:checked {
+  border-color: #1e5282;
+  border: 6px solid #f85545;
+}
+
+/* Form First page Transition */
+
+@keyframes moveUpfirst {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.transition-down-upfirst {
+  animation: moveUpfirst 0.9s ease-in-out forwards;
+}
+
+/* Form 2nd page Transition */
+
+@keyframes moveUp2 {
+  from {
+    transform: translateY(30%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.transition-down-up2 {
+  animation: moveUp2 0.9s ease-in-out forwards;
+}
+
+/* Form 3rd page Transition */
+
+@keyframes moveDown3 {
+  from {
+    transform: translateY(-20%); /* Start from above the original position */
+  }
+  to {
+    transform: translateY(0); /* Move to original position */
+  }
+}
+
+.transition-up-down3 {
+  animation: moveDown3 0.9s ease-in-out forwards;
+}
+
+/* Form 4th page Transition */
+
+@keyframes moveUp4 {
+  from {
+    transform: translateY(20%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.transition-down-up4 {
+  animation: moveUp4 0.9s ease-in-out forwards;
+}
+
+/* Form 5th page Transition */
+
+@keyframes moveDown5 {
+  from {
+    transform: translateY(-20%); /* Start from above the original position */
+  }
+  to {
+    transform: translateY(0); /* Move to original position */
+  }
+}
+
+.transition-up-down5 {
+  animation: moveDown5 0.9s ease-in-out forwards;
+}
+
+/* Form 6th page Transition */
+
+@keyframes moveUp6 {
+  from {
+    transform: translateY(40%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.transition-down-up6 {
+  animation: moveUp6 0.9s ease-in-out forwards;
+}
+
+/* Form 7th page Transition */
+
+@keyframes moveDown7 {
+  from {
+    transform: translateY(-30%); /* Start from above the original position */
+  }
+  to {
+    transform: translateY(0); /* Move to original position */
+  }
+}
+
+.transition-up-down7 {
+  animation: moveDown7 0.9s ease-in-out forwards;
+}
+
+/* Form 8th page Transition */
+
+@keyframes moveUp8 {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.transition-down-up8 {
+  animation: moveUp8 0.9s ease-in-out forwards;
+}
+
+/* Form 9th page Transition */
+
+@keyframes moveDown9 {
+  from {
+    transform: translateY(-5%); /* Start from above the original position */
+  }
+  to {
+    transform: translateY(0); /* Move to original position */
+  }
+}
+
+.transition-up-down9 {
+  animation: moveDown9 0.9s ease-in-out forwards;
+}
+
+/* Forms Buttons Transition from left */
+
+@keyframes moveFromLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-0);
+  }
+}
+
+.transition-from-left {
+  animation: moveFromLeft 0.9s ease-in-out forwards;
+}
+
+/* Forms Buttons Transition from left */
+
+@keyframes moveFromRight {
+  from {
+    transform: translateX(-100%); /* Start from off-screen to the right */
+  }
+  to {
+    transform: translateX(0); /* Move to original position */
+  }
+}
+
+.transition-from-right {
+  animation: moveFromRight 0.9s ease-in-out forwards;
+}
+
+/* Submit Form Button Transition from left */
+
+@keyframes moveFromLeft1 {
+  from {
+    transform: translateX(30%);
+  }
+  to {
+    transform: translateX(-0);
+  }
+}
+
+.transition-from-left1 {
+  animation: moveFromLeft1 0.9s ease-in-out forwards;
+}
+
+/* Form pages HR line CSS */
+
+.text-below {
+  position: absolute;
+  top: calc(15% + 20px); /* Adjust to position below the line */
+  text-align: center;
+  z-index: 10; /* Ensure the text is above the line */
+}
+
+/* Page 1st HR line css */
+
+.text-below-red {
+  left: -8;
+  width: 16.6%;
+}
+
+/* Page 2nd HR line css */
+
+.text-below-red2 {
+  left: 5%;
+  width: 33.2%;
+}
+
+/* Page 3rd HR line css */
+
+.text-below-red3 {
+  left: 15%;
+  width: 49.8%;
+}
+
+/* Page 4th HR line css */
+
+.text-below-red4 {
+  left: 26%;
+  width: 66.4%;
+}
+
+/* Page 5th HR line css */
+
+.text-below-red5 {
+  left: 32%;
+  width: 83%;
+}
+
+/* Page 6th HR line css */
+
+.text-below-red6 {
+  left: 40%;
+  width: 100%;
+}
+
+/* Form pages HR line transition */
+
+/* Page 1 HR line transition */
+
+.percentage {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress 1000ms ease-in-out;
+}
+
+.bar {
+  width: 16.6%;
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+}
+
+/* Page 2 HR line transition */
+
+.percentage1 {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress1 1000ms ease-in-out backwards;
+}
+
+/* Assigning width of each languages*/
+.bar1 {
+  width: 33.2%;
+}
+
+/* Animating the progress bar by
+      initially starting from 0*/
+
+@keyframes progress1 {
+  from {
+    width: 16.6%;
+  }
+}
+
+/* Page 3 HR line transition */
+
+.percentage2 {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress2 1000ms ease-in-out backwards;
+}
+
+/* Assigning width of each languages*/
+.bar2 {
+  width: 49.8%;
+}
+
+/* Animating the progress bar by
+      initially starting from 0*/
+
+@keyframes progress2 {
+  from {
+    width: 33.2%;
+  }
+}
+
+/* Page 4 HR line transition */
+
+.percentage3 {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress3 1000ms ease-in-out backwards;
+}
+
+/* Assigning width of each languages*/
+.bar3 {
+  width: 66.4%;
+}
+
+/* Animating the progress bar by
+      initially starting from 0*/
+
+@keyframes progress3 {
+  from {
+    width: 49.8%;
+  }
+}
+
+/* Page 5 HR line transition */
+
+.percentage4 {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress4 1000ms ease-in-out backwards;
+}
+
+/* Assigning width of each languages*/
+.bar4 {
+  width: 83%;
+}
+
+/* Animating the progress bar by
+      initially starting from 0*/
+
+@keyframes progress4 {
+  from {
+    width: 66.4%;
+  }
+}
+
+/* Page 6 HR line transition */
+
+.percentage5 {
+  display: block;
+  height: 100%;
+  background-color: #f85545;
+  border-radius: 2px;
+  animation: progress5 1000ms ease-in-out backwards;
+}
+
+/* Assigning width of each languages*/
+.bar5 {
+  width: 100%;
+}
+
+/* Animating the progress bar by
+      initially starting from 0*/
+
+@keyframes progress5 {
+  from {
+    width: 83%;
+  }
+}
+
+.mui-tel-input .MuiInputAdornment-root::after {
+  content: "";
+  display: flex;
+  height: 24px; /* Adjust to match the height of the flag */
+  width: 1px; /* Thickness of the HR line */
+  background-color: gray; /* Color of the HR line */
+  margin-left: 8px; /* Space between the flag and the HR line */
+}
+
+.MuiPaper-root {
+  background-color: #eaea87;
+}
