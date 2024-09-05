@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { useChat } from "ai/react";
-import { TextField } from "@mui/material";
+import { InputLabel, TextField } from "@mui/material";
 import { getApiUrl } from "@lib/api.ts";
 import { constants } from "@lib/constants.ts";
 import { characters as defaultCharacters, genres, tones } from "@lib/storyTeller"; // Add this import
@@ -16,6 +16,7 @@ type ChatBody = {
   tone: string;
   evaluation?: string | undefined;
   isEvaluated: boolean; // Add isEvaluated state
+  maxTokens: number; // Add this line
 };
 
 export default function Chat() {
@@ -27,6 +28,7 @@ export default function Chat() {
     temperature: "" + constants.openAI.temperature,
     evaluation: "",
     isEvaluated: false,
+    maxTokens: constants.openAI.maxTokens,
   });
   const { messages, append, isLoading } = useChat({
     api: getApiUrl(constants.routes.api.chat),
@@ -39,6 +41,7 @@ export default function Chat() {
       characters: characters,
       genre: state.genre,
       tone: state.tone,
+      maxTokens: state.maxTokens, // Add this line
     } as ChatBody,
   });
   // console.log("page -> input", input, "messages", messages);
@@ -95,18 +98,20 @@ export default function Chat() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-grow overflow-y-auto p-4 max-w-3xl mx-auto">
-        <div className="mx-auto space-y-2">
-          <h2 className="text-3xl font-bold">Multi-Character Story Telling App</h2>
-          <p className="text-zinc-500 dark:text-zinc-400">
-            Customize the story by adding characters, selecting the genre and setting the tone.
+        <div className="mx-auto space-y-4 text-center">
+          <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            Multi-Character Story Telling App
+          </h1>
+          <p className="text-lg text-zinc-400 dark:text-purple-300 max-w-2xl mx-auto">
+            Craft unique tales by adding characters, choosing a genre, and setting the perfect tone.
           </p>
         </div>
-        <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4 mt-4">
-          <h3 className="text-xl font-semibold">Characters</h3>
+        <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
+          <h3 className="text-2xl font-bold text-center text-white mb-4">Characters</h3>
 
           <div className="space-y-4">
             {characters.map((character, index) => (
-              <div key={index} className="rounded-lg p-4 space-y-2">
+              <div key={index} className="rounded-lg p-4 space-y-2 bg-white bg-opacity-10 backdrop-blur-sm">
                 <div className="flex justify-between items-center">
                   <div className="flex-grow flex space-x-2">
                     <TextField
@@ -115,6 +120,10 @@ export default function Chat() {
                       value={character.name}
                       onChange={(e) => editCharacter(index, "name", e.target.value)}
                       className="flex-1"
+                      slotProps={{
+                        input: { style: { color: "white" } },
+                        inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                      }}
                     />
                     <TextField
                       label="Personality"
@@ -122,11 +131,15 @@ export default function Chat() {
                       value={character.personality || ""}
                       onChange={(e) => editCharacter(index, "personality", e.target.value)}
                       className="flex-1"
+                      slotProps={{
+                        input: { style: { color: "white" } },
+                        inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                      }}
                     />
                   </div>
                   <button
                     onClick={() => deleteCharacter(index)}
-                    className="text-gray-400 hover:text-red-500 transition-colors duration-300"
+                    className="text-purple-200 hover:text-red-500 transition-colors duration-300"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -152,13 +165,17 @@ export default function Chat() {
                   className="w-full"
                   multiline
                   rows={2}
+                  slotProps={{
+                    input: { style: { color: "white" } },
+                    inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                  }}
                 />
               </div>
             ))}
           </div>
 
           <div className="space-y-4">
-            <div className="rounded-lg p-4 space-y-2">
+            <div className="rounded-lg p-4 space-y-2 bg-white bg-opacity-10 backdrop-blur-sm">
               <div className="flex justify-between items-center">
                 <div className="flex-grow flex space-x-2">
                   <TextField
@@ -167,6 +184,10 @@ export default function Chat() {
                     value={newCharacter.name}
                     onChange={(e) => setNewCharacter({ ...newCharacter, name: e.target.value })}
                     className="flex-1"
+                    slotProps={{
+                      input: { style: { color: "white" } },
+                      inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                    }}
                   />
                   <TextField
                     label="Personality"
@@ -174,11 +195,15 @@ export default function Chat() {
                     value={newCharacter.personality}
                     onChange={(e) => setNewCharacter({ ...newCharacter, personality: e.target.value })}
                     className="flex-1"
+                    slotProps={{
+                      input: { style: { color: "white" } },
+                      inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                    }}
                   />
                 </div>
                 <button
                   onClick={addCharacter}
-                  className="text-gray-400 hover:text-green-500 transition-colors duration-300"
+                  className="text-purple-200 hover:text-green-500 transition-colors duration-300"
                   tabIndex={3}
                 >
                   <svg
@@ -201,6 +226,10 @@ export default function Chat() {
                 multiline
                 rows={2}
                 tabIndex={2}
+                slotProps={{
+                  input: { style: { color: "white" } },
+                  inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                }}
               />
             </div>
           </div>
@@ -288,6 +317,37 @@ export default function Chat() {
             </span>
           </p>
         </div>
+
+        <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
+          <h3 className="text-2xl font-bold text-center text-white mb-4">Set Maximum Tokens</h3>
+
+          <div className="flex items-center justify-center space-x-4">
+            <span role="img" aria-label="Short" className="text-3xl">
+              📄
+            </span>
+            <input
+              type="range"
+              min="500"
+              max="2000"
+              step="100"
+              value={state.maxTokens}
+              onChange={(e) => setState({ ...state, maxTokens: parseInt(e.target.value) })}
+              name="maxTokens"
+              className="w-64 h-2 bg-white bg-opacity-30 rounded-lg appearance-none cursor-pointer"
+            />
+            <span role="img" aria-label="Long" className="text-3xl">
+              📚
+            </span>
+          </div>
+          <p className="text-center mt-2 text-white">
+            Maximum Tokens: {state.maxTokens}
+            <br />
+            <span className="text-sm text-purple-200">
+              ({state.maxTokens < 1000 ? "Shorter response" : "Longer response"})
+            </span>
+          </p>
+        </div>
+
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded disabled:opacity-50"
           disabled={isLoading || !state.genre || !state.tone}

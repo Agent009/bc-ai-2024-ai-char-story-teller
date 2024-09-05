@@ -35,6 +35,7 @@ export const constants = Object.freeze({
       genAudioVoice: process.env.OPENAI_GEN_AUDIO_VOICE || "alloy",
     },
     temperature: 0.5,
+    maxTokens: 500,
     promptTypes: {
       chat: "chat",
       generateImage: "generateImage",
