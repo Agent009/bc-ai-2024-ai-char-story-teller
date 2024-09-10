@@ -11,19 +11,19 @@ const RUN_ENV_MAP = {
     name: appName + "-local",
     instances: 1,
     max_memory_restart: "250M",
-    args: "dev -p 3093",
+    args: "dev -p 3091",
   },
   dev: {
     name: appName + "-dev",
     instances: 1,
     max_memory_restart: "250M",
-    args: "dev -p 3093",
+    args: "dev -p 3091",
   },
   prod: {
     name: appName + "-prod",
     instances: 1,
     max_memory_restart: "1000M",
-    args: "start -p 3093",
+    args: "start -p 3091",
   },
 };
 
