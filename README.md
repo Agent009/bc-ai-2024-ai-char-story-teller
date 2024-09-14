@@ -1,12 +1,16 @@
 # Encode_AI-and-GPT-Bootcamp-Q3-2024
 
-Week 3 Group Project: Building a Multi-Character Storytelling Application
+* Week 4 Group Project: RAG-Driven Multi-Character Storytelling Application - Extract characters from uploaded story / character definitions file, generate story based on those characters.
+* Week 3 Group Project: Multi-Character Storytelling Application
 
 ## Instructions / README
 
+- [Lesson-16 / Weekend Project](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/tree/main/Lesson-16#weekend-project)
 - [Lesson-12 / Weekend Project](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/tree/main/Lesson-12#weekend-project)
 
 **Uses a list of characters and their associated backstories to generate a story.**
+
+The amendments from Week 4 Weekend Project enable a story or character definitions file to be uploaded and characters to be extracted from that.
 
 ## Setup
 
