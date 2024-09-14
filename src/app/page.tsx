@@ -156,11 +156,11 @@ export default function Chat() {
   };
 
   const handleFileUpload = async (file: File) => {
-    console.log("index -> handleFileUpload -> file", file);
+    // console.log("index -> handleFileUpload -> file", file);
     setIsLoading2(true);
     try {
       if (file.type === "application/pdf") {
-        console.log("index -> handleFileUpload -> pdf document detected");
+        // console.log("index -> handleFileUpload -> pdf document detected");
         setAnswer("Error processing file - PDF documents aren't supported.");
         // const arrayBuffer = await file.arrayBuffer();
         // // console.log("index -> handleFileUpload -> arrayBuffer created");
@@ -211,7 +211,7 @@ export default function Chat() {
         const reader = new FileReader();
         reader.onload = (event) => {
           const content = event.target?.result as string;
-          console.log("index -> handleFileUpload -> non-pdf document text fetched");
+          // console.log("index -> handleFileUpload -> non-pdf document text fetched");
           setText(content);
         };
         reader.readAsText(file);
@@ -222,6 +222,7 @@ export default function Chat() {
     } finally {
       setIsLoading2(false);
       setNeedsNewIndex(true);
+      setTabValue(TAB_INDEX);
     }
   };
 
@@ -268,7 +269,7 @@ export default function Chat() {
                     type="file"
                     accept=".txt,.md"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      console.log("File input changed");
+                      // console.log("File input changed");
                       const file = e.target.files?.[0];
                       if (file) {
                         console.log("File selected:", file.name, file.type);
@@ -410,7 +411,7 @@ export default function Chat() {
 
                   if (payload) {
                     setNodesWithEmbedding(payload.nodesWithEmbedding);
-                    setAnswer("Index built!");
+                    setAnswer("Index built, ready to extract characters");
                     setTabValue(TAB_EXTRACT);
                   }
                 }}
@@ -504,7 +505,7 @@ export default function Chat() {
                         disabled={needsNewIndex || buildingIndex || runningQuery}
                         onClick={async () => {
                           setIsLoading2(true);
-                          setAnswer("Running query...");
+                          setAnswer("Extracting characters...");
                           setRunningQuery(true);
                           // Post the query and nodesWithEmbedding to the server
                           const result = await fetch(getApiUrl(constants.routes.api.retrieveQuery), {
