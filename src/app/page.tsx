@@ -41,6 +41,11 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
+const TAB_UPLOAD = 0;
+const TAB_INDEX = 1;
+const TAB_EXTRACT = 2;
+const TAB_CHARACTERS = 3;
+const TAB_GENERATE = 4;
 
 export default function Chat() {
   const answerId = useId();
@@ -236,14 +241,14 @@ export default function Chat() {
           </p>
         </div>
         <Tabs value={tabValue} onChange={handleTabChange} aria-label="tabs">
-          <Tab label="Upload" icon={<CloudUploadIcon />} />
-          <Tab label="Index" icon={<InsertDriveFileIcon />} />
-          <Tab label="Extract" icon={<Loader2 />} />
-          <Tab label="Characters" icon={<PersonIcon />} />
-          <Tab label="Generate" icon={<CreateIcon />} />
+          <Tab value={TAB_UPLOAD} label="Upload" icon={<CloudUploadIcon />} />
+          <Tab value={TAB_INDEX} label="Index" icon={<InsertDriveFileIcon />} />
+          <Tab value={TAB_EXTRACT} label="Extract" icon={<Loader2 />} />
+          <Tab value={TAB_CHARACTERS} label="Characters" icon={<PersonIcon />} />
+          <Tab value={TAB_GENERATE} label="Generate" icon={<CreateIcon />} />
         </Tabs>
 
-        {tabValue === 0 && (
+        {tabValue === TAB_UPLOAD && (
           <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center text-white mb-4">Upload Character Definitions File</h3>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
@@ -283,119 +288,145 @@ export default function Chat() {
                   </div>
                 )}
               </div>
+              {/*<Button*/}
+              {/*  variant="contained"*/}
+              {/*  onClick={() => {*/}
+              {/*    setText("");*/}
+              {/*    setNeedsNewIndex(true);*/}
+              {/*  }}*/}
+              {/*  className="w-full sm:w-auto bg-indigo-900 text-white hover:bg-indigo-800 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"*/}
+              {/*>*/}
+              {/*  Reset to Default*/}
+              {/*</Button>*/}
               <Button
                 variant="contained"
                 onClick={() => {
-                  setText("");
-                  setNeedsNewIndex(true);
+                  setTabValue(TAB_CHARACTERS);
                 }}
                 className="w-full sm:w-auto bg-indigo-900 text-white hover:bg-indigo-800 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
               >
-                Reset to Default
+                Skip to Character Definitions
               </Button>
             </div>
           </div>
         )}
 
-        {tabValue === 1 && (
+        {tabValue === TAB_INDEX && (
           <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center text-white mb-4">Build Index</h3>
-            <RangeInput
-              headingCls={"text-xl"}
-              heading="Chunk Size"
-              tooltip={
-                "The maximum size of the chunks we are searching over, in tokens. " +
-                "The bigger the chunk, the more likely that the information you are looking " +
-                "for is in the chunk, but also the more likely that the chunk will contain " +
-                "irrelevant information."
-              }
-              min={1}
-              max={3000}
-              step={1}
-              value={state.chunkSize}
-              onChange={handleChange}
-              name="chunkSize"
-              paragraphText={`Chunk Size: ${state.chunkSize || constants.openAI.rag.chunkSize}<br /><span class="text-sm text-purple-200">(${Number(state.chunkSize) < 1024 ? "Less hit probability, more relevant" : "Higher hit probability, less relevant"})</span>`}
-              emojiStart="🧊"
-              emojiEnd="🎲"
-              disabled={text?.length <= 0}
-            />
-            <RangeInput
-              headingCls={"text-xl"}
-              heading="Chunk Overlap"
-              tooltip={
-                "The maximum amount of overlap between chunks, in tokens. " +
-                "Overlap helps ensure that sufficient contextual information is retained."
-              }
-              min={1}
-              max={600}
-              step={1}
-              value={state.chunkOverlap}
-              onChange={handleChange}
-              name="chunkOverlap"
-              paragraphText={`Chunk Overlap: ${state.chunkOverlap || constants.openAI.rag.chunkOverlap}<br /><span class="text-sm text-purple-200">(${Number(state.chunkOverlap) < 1024 ? "Less contextual information retained" : "More contextual information retained"})</span>`}
-              emojiStart="🧊"
-              emojiEnd="🎲"
-              disabled={text?.length <= 0}
-            />
-            <div className="my-2 flex h-3/4 flex-auto flex-col space-y-2">
-              <TextField
-                id={sourceId}
-                label="Extracted Text"
-                variant="standard"
-                value={text}
-                className="flex-1"
-                multiline
-                rows={2}
-                slotProps={{
-                  input: { style: { color: "white" } },
-                  inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+            <div className="text-center">
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setTabValue(TAB_CHARACTERS);
                 }}
-                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                  setText(e.target.value);
-                  setNeedsNewIndex(true);
+                className="w-full sm:w-auto bg-indigo-900 text-white hover:bg-indigo-800 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
+              >
+                Skip to Character Definitions
+              </Button>
+              <div className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <RangeInput
+                  headingCls={"text-xl"}
+                  heading="Chunk Size"
+                  tooltip={
+                    "The maximum size of the chunks we are searching over, in tokens. " +
+                    "The bigger the chunk, the more likely that the information you are looking " +
+                    "for is in the chunk, but also the more likely that the chunk will contain " +
+                    "irrelevant information."
+                  }
+                  min={1}
+                  max={3000}
+                  step={1}
+                  value={state.chunkSize}
+                  onChange={handleChange}
+                  name="chunkSize"
+                  paragraphText={`Chunk Size: ${state.chunkSize || constants.openAI.rag.chunkSize}<br /><span class="text-sm text-purple-200">(${Number(state.chunkSize) < 1024 ? "Less hit probability, more relevant" : "Higher hit probability, less relevant"})</span>`}
+                  emojiStart="🧊"
+                  emojiEnd="🎲"
+                  disabled={text?.length <= 0}
+                />
+                <RangeInput
+                  headingCls={"text-xl"}
+                  heading="Chunk Overlap"
+                  tooltip={
+                    "The maximum amount of overlap between chunks, in tokens. " +
+                    "Overlap helps ensure that sufficient contextual information is retained."
+                  }
+                  min={1}
+                  max={600}
+                  step={1}
+                  value={state.chunkOverlap}
+                  onChange={handleChange}
+                  name="chunkOverlap"
+                  paragraphText={`Chunk Overlap: ${state.chunkOverlap || constants.openAI.rag.chunkOverlap}<br /><span class="text-sm text-purple-200">(${Number(state.chunkOverlap) < 1024 ? "Less contextual information retained" : "More contextual information retained"})</span>`}
+                  emojiStart="🧊"
+                  emojiEnd="🎲"
+                  disabled={text?.length <= 0}
+                />
+              </div>
+              <div className="my-2 flex h-3/4 flex-auto flex-col space-y-2 mt-10">
+                <TextField
+                  id={sourceId}
+                  label="Extracted Text"
+                  variant="standard"
+                  value={text}
+                  className="flex-1"
+                  multiline
+                  rows={10}
+                  slotProps={{
+                    input: { style: { color: "white" } },
+                    inputLabel: { style: { color: "rgba(255, 255, 255, 0.7)" } },
+                  }}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                    setText(e.target.value);
+                    setNeedsNewIndex(true);
+                  }}
+                />
+              </div>
+              <Button
+                variant="contained"
+                disabled={!needsNewIndex || buildingIndex || runningQuery}
+                onClick={async () => {
+                  setAnswer("Building index...");
+                  setBuildingIndex(true);
+                  setNeedsNewIndex(false);
+                  const result = await fetch(getApiUrl(constants.routes.api.splitEmbed), {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      document: text,
+                      chunkSize: state.chunkSize,
+                      chunkOverlap: state.chunkOverlap,
+                    }),
+                  });
+                  const { error, payload } = await result.json();
+                  setBuildingIndex(false);
+
+                  if (error) {
+                    setAnswer(error);
+                  }
+
+                  if (payload) {
+                    setNodesWithEmbedding(payload.nodesWithEmbedding);
+                    setAnswer("Index built!");
+                    setTabValue(TAB_EXTRACT);
+                  }
                 }}
-              />
+                className="w-full sm:w-auto bg-purple-800 text-white hover:bg-purple-600 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
+              >
+                {buildingIndex
+                  ? "Building Vector Index..."
+                  : needsNewIndex
+                    ? "Build Index"
+                    : "Index Built, Ready for Extraction"}
+              </Button>
             </div>
-            <Button
-              variant="contained"
-              disabled={!needsNewIndex || buildingIndex || runningQuery}
-              onClick={async () => {
-                setAnswer("Building index...");
-                setBuildingIndex(true);
-                setNeedsNewIndex(false);
-                const result = await fetch(getApiUrl(constants.routes.api.splitEmbed), {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    document: text,
-                    chunkSize: state.chunkSize,
-                    chunkOverlap: state.chunkOverlap,
-                  }),
-                });
-                const { error, payload } = await result.json();
-
-                if (error) {
-                  setAnswer(error);
-                }
-
-                if (payload) {
-                  setNodesWithEmbedding(payload.nodesWithEmbedding);
-                  setAnswer("Index built!");
-                }
-
-                setBuildingIndex(false);
-              }}
-              className="w-full sm:w-auto bg-purple-800 text-white hover:bg-purple-600 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
-            >
-              {buildingIndex ? "Building Vector index..." : "Build index"}
-            </Button>
           </div>
         )}
 
-        {tabValue === 2 && (
+        {tabValue === TAB_EXTRACT && (
           <>
             <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
               <h3 className="text-2xl font-bold text-center text-white mb-4">Extract Characters</h3>
@@ -407,7 +438,7 @@ export default function Chat() {
                 </div>
               ) : (
                 <>
-                  <div className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
+                  <div className="my-2 grid grid-cols-1 gap-4 lg:grid-cols-2">
                     <RangeInput
                       headingCls={"text-xl"}
                       heading="Top K"
@@ -467,7 +498,7 @@ export default function Chat() {
                   </div>
 
                   <div className="my-4">
-                    <div className="flex w-full items-center space-x-4">
+                    <div className="w-full text-center space-x-4">
                       <Button
                         type="submit"
                         disabled={needsNewIndex || buildingIndex || runningQuery}
@@ -515,6 +546,7 @@ export default function Chat() {
 
                           setRunningQuery(false);
                           setIsLoading2(false);
+                          setTabValue(TAB_CHARACTERS);
                         }}
                         className="w-full sm:w-auto bg-purple-800 text-white hover:bg-purple-600 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
                       >
@@ -549,7 +581,7 @@ export default function Chat() {
           </>
         )}
 
-        {tabValue === 3 && (
+        {tabValue === TAB_CHARACTERS && (
           <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center text-white mb-4">Characters</h3>
 
@@ -677,10 +709,20 @@ export default function Chat() {
                 />
               </div>
             </div>
+
+            <Button
+              variant="contained"
+              onClick={() => {
+                setTabValue(TAB_GENERATE);
+              }}
+              className="w-full sm:w-auto bg-purple-800 text-white hover:bg-purple-600 disabled:bg-purple-900 disabled:text-white disabled:opacity-50"
+            >
+              Generate Story
+            </Button>
           </div>
         )}
 
-        {tabValue === 4 && (
+        {tabValue === TAB_GENERATE && (
           <>
             <div className="space-y-6 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 mt-6 shadow-lg">
               <h3 className="text-2xl font-bold text-center text-white mb-4">Select Your Genre</h3>
