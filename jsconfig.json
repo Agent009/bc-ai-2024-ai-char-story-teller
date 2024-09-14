@@ -6,7 +6,8 @@
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@images/*": ["./src/assets/images/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@customTypes/*": ["./src/types/*"]
     }
   }
 }

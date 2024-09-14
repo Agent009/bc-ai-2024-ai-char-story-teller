@@ -34,6 +34,13 @@ export const constants = Object.freeze({
       genAudio: process.env.OPENAI_GEN_AUDIO_MODEL || "tts-1",
       genAudioVoice: process.env.OPENAI_GEN_AUDIO_VOICE || "alloy",
     },
+    rag: {
+      chunkSize: 1500,
+      chunkOverlap: 20,
+      topK: 2,
+      topP: 1,
+      temperature: 0.1,
+    },
     temperature: 0.5,
     maxTokens: 500,
     promptTypes: {
@@ -56,6 +63,8 @@ export const constants = Object.freeze({
       evaluate: "evaluate",
       generateImage: "images",
       generateAudio: "audio",
+      splitEmbed: "split-and-embed",
+      retrieveQuery: "retrieve-and-query",
     },
   },
 });

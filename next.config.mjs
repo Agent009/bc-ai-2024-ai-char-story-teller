@@ -1,4 +1,14 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withLlamaIndex from "llamaindex/next";
 
-export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  //   webpack(config) {
+  //     config.experiments = {
+  //       ...config.experiments,
+  //       asyncWebAssembly: true,
+  //     };
+  //     return config;
+  //   },
+};
+
+export default withLlamaIndex(nextConfig);

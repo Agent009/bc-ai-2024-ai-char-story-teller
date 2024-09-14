@@ -7,8 +7,8 @@ import FavIcon from "@images/icons/favicon.ico";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Multi-Modal ChatBot - Encode AI Bootcamp (Q3 2024)",
-  description: "Creating a Multi-Modal Chat Bot",
+  title: "Multi-Character AI Story Telling App- Encode AI Bootcamp (Q3 2024)",
+  description: "Craft unique tales by adding characters, choosing a genre, and setting the perfect tone.",
   icons: {
     icon: FavIcon.src,
   },
