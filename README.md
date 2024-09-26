@@ -1,6 +1,6 @@
-# Encode_AI-and-GPT-Bootcamp-Q3-2024
+# RAG-Driven Multi-Character Storytelling Application
 
-* Week 4 Group Project: RAG-Driven Multi-Character Storytelling Application - Extract characters from uploaded story / character definitions file, generate story based on those characters.
+* Week 4 Group Project: **RAG-Driven** Multi-Character Storytelling Application - Extract characters from uploaded story / character definitions file, generate story based on those characters.
 * Week 3 Group Project: Multi-Character Storytelling Application
 
 ## Instructions / README
